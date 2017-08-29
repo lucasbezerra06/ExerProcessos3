@@ -2,12 +2,16 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.BuscarController;
+import controller.CancelarController;
+import controller.OkController;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -17,7 +21,6 @@ public class telaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfCaminho;
-
 	/**
 	 * Launch the application.
 	 */
@@ -61,16 +64,31 @@ public class telaPrincipal extends JFrame {
 		JButton btnOk = new JButton("OK");
 		btnOk.setBounds(25, 129, 89, 23);
 		contentPane.add(btnOk);
+		OkController okController = new OkController(tfCaminho,this);
+		btnOk.addActionListener(okController);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(124, 129, 89, 23);
 		contentPane.add(btnCancelar);
+		CancelarController cancelarController = new CancelarController(this);
+		ActionListener fechar = new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				this.dispose();
+				
+			}
+		};
+		btnCancelar.addActionListener(cancelarController);
+		
+		
 		
 		JButton btnProcurar = new JButton("Procurar");
 		btnProcurar.setBounds(223, 129, 89, 23);
 		contentPane.add(btnProcurar);
-		
 		BuscarController buscar = new BuscarController(tfCaminho);
 		btnProcurar.addActionListener(buscar);
+		
+		
 	}
 }
